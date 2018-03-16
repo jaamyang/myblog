@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+    VIBE的博客 首页
+{% endblock %}
+
+
+{% block content %}
+    <div class="jumbotron">
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <h1 align="center" style="color: #ffffff">Justy's Blog</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    </div>
+    <div class="container home-text">
+        <div class="col-sm-8 ">
+            {% for blog in home %}
+            <h3>{{ blog.title }}</h3>
+            <p>作&#12288;&#12288;者：{{ blog.author }}</p>
+            <p>发布日期：{{ blog.created_time }}</p>
+            <p>分&#12288;&#12288;类：
+                <a href="{% url 'blog_with_type' blog.blog_type.pk %}"> {{ blog.blog_type }}</a>
+            </p>
+            <hr>
+            {{ blog.content|safe }}
+            <br>
+            <br>
+            {% endfor %}
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 hidden-xs">
+            <h3>博文分类</h3>
+            {% for type in blog_type %}
+                <a href="{% url 'blog_with_type' type.pk %}">{{ type }}</a>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+{%endblock%}
